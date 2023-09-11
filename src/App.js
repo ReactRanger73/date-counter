@@ -1,24 +1,17 @@
-import "./App.css";
+import "./index.css";
 import { useState } from "react";
 
 export default function App() {
   return (
-    <div class="app">
+    <div class="App">
       <Buttons />
     </div>
   );
 }
 
 function Buttons() {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
   const [count, setCount] = useState(0);
-
-  function decreaseStep() {
-    setStep((s) => s - 1);
-  }
-  function increaseStep() {
-    setStep((s) => s + 1);
-  }
 
   function increaseCount() {
     setCount((c) => c + step);
@@ -31,21 +24,26 @@ function Buttons() {
   date.setDate(date.getDate() + count);
 
   return (
-    <>
+    <div>
       <div>
-        <button type="button" onClick={decreaseStep}>
-          -
-        </button>
+        <input
+          type="range"
+          min="0"
+          max="10"
+          value={step}
+          onChange={(e) => setStep(Number(e.target.value))}
+        />
         <span>Step : {step}</span>
-        <button type="button" onClick={increaseStep}>
-          +
-        </button>
       </div>
       <div>
         <button type="button" onClick={decreaseCount}>
           -
         </button>
-        <span>Count : {count}</span>
+        <input
+          type="text"
+          onChange={(e) => setCount(Number(e.target.value))}
+          value={count}
+        ></input>
         <button type="button" onClick={increaseCount}>
           +
         </button>
@@ -60,6 +58,6 @@ function Buttons() {
         </span>
         <span>{date.toDateString()}</span>
       </p>
-    </>
+    </div>
   );
 }
